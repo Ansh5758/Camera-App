@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collage Web App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+    <style>
+        body {
+            background: radial-gradient(circle at 0% 100%, rgb(202, 234, 255), rgb(119, 200, 253), rgb(22, 161, 254), rgb(0, 136, 226), rgb(0, 84, 202));
+            color: white;
+            padding: 10px;
+        }
+
+        .inline {
+            height: 300px;
+            width: 350px;
+            border: 3px solid black;
+            border-radius: 0px 30px 0px 30px;
+            transition: all 1s ease-in-out;
+            display: flex;
+            justify-content: center;
+            margin: 7.5px 0px;
+            align-items: center;
+        }
+        .ok{
+            border-radius: 0px 30px 0px 30px;
+            transition: all 1s ease-in-out;
+        }
+        .ok:hover{
+            border-radius: 30px 0px 30px 0px;
+        }
+        .inline:hover {
+            border-radius: 30px 0px 30px 0px;
+        }
+
+        label {
+            font-size: x-large;
+        }
+
+        button {
+            border: 2.5px solid white;
+            background-color: rgb(0, 153, 255);
+            border-radius: 10px;
+            font-size: 18px;
+            padding: 3px 6px;
+            font-weight: 400;
+            transition: 0.1s;
+        }
+
+        button:active {
+            background-color: rgba(0, 103, 255, 0.791);
+        }
+
+        .inline {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body onload="onload()">
+    <center>
+        <h1>Collage Web App</h1>
+        <h5>Kindly click <b>'Allow'</b> for the camera and audio permissions.</h5>
+        <div id="camera"></div><br>
+        <button onclick="selfie()">Click the selfie</button><br><br>
+        <label>Your Selfies</label>
+        <br>
+        <div id="div">
+            <div class="inline" id="d1"></div><br>
+            <div class="inline" id="d2"></div><br>
+            <div class="inline" id="d3"></div>
+        </div>
+        <a href="" id="a" download="selfie1.png"></a>
+        <a href="" id="a2" download="selfie2.png"></a>
+        <a href="" id="a3" download="selfie3.png"></a>
+        <audio id="audio" src="camera-shutter-click-08.mp3"></audio>
+
+        <script>
+            // Ma'am, I didn't add the feature which converts our speech to text because it was useless.
+            imgID = 'i1';
+            Webcam.set({
+                height: 294,
+                width: 344,
+                margin: 7.5,
+                image_format: 'png',
+                png_quality: 90
+            });
+            function onload(){
+                Webcam.attach('#camera');
+            }
+            function selfie(){
+                var x = window.speechSynthesis;
+                y = 'taking 3 selfies in 3, 6, and 9 seconds';
+                var utter = new SpeechSynthesisUtterance(y);
+                x.speak(utter);
+                setTimeout(function(){
+                    imgID = 'i1';
+                    document.getElementById('audio').play();
+                    snapshot();
+                    save();
+                }, 7000);
+                setTimeout(function(){
+                    imgID = 'i2';
+                    document.getElementById('audio').play();
+                    snapshot();
+                    save();
+                }, 10000);
+                setTimeout(function(){
+                    imgID = 'i3';
+                    document.getElementById('audio').play();
+                    snapshot();
+                    save();
+                }, 13000);
+                // I gave different time in setTimeout because it takes time for dictation.
+            }
+            function snapshot(){
+                if (imgID == 'i1'){
+                    Webcam.snap(function (abc){
+                        document.getElementById('d1').innerHTML = '<img class="ok" id="img1" src="' + abc + '">'
+                    });
+                }
+                if (imgID == 'i2'){
+                    Webcam.snap(function (abcd){
+                        document.getElementById('d2').innerHTML = '<img class="ok" id="img2" src="' + abcd + '">'
+                    });
+                }
+                if (imgID == 'i3'){
+                    Webcam.snap(function (abce){
+                        document.getElementById('d3').innerHTML = '<img class="ok" id="img3" src="' + abce + '">'
+                    });
+                }
+            }
+            function save(){
+                a = document.getElementById('a');
+                a2 = document.getElementById('a2');
+                a3 = document.getElementById('a3');
+                img1 = document.getElementById('img1').src;
+                img2 = document.getElementById('img2').src;
+                img3 = document.getElementById('img3').src;
+                a.href = img1;
+                a2.href = img2;
+                a3.href = img3;
+                a.click();
+                a2.click();
+                a3.click();
+            }
+        </script>
+    </center>
+</body>
+
+</html>
