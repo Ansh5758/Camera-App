@@ -18,8 +18,8 @@
         }
 
         .inline {
-            height: 300px;
-            width: 350px;
+            width: 300px;
+            height: 350px;
             border: 3px solid black;
             border-radius: 0px 30px 0px 30px;
             transition: all 1s ease-in-out;
@@ -28,6 +28,9 @@
             margin: 7.5px 0px;
             align-items: center;
         }
+        .inline:hover {
+            border-radius: 30px 0px 30px 0px;
+        }
         .ok{
             border-radius: 0px 30px 0px 30px;
             transition: all 1s ease-in-out;
@@ -35,10 +38,6 @@
         .ok:hover{
             border-radius: 30px 0px 30px 0px;
         }
-        .inline:hover {
-            border-radius: 30px 0px 30px 0px;
-        }
-
         label {
             font-size: x-large;
         }
@@ -67,7 +66,7 @@
     <center>
         <h1>Collage Web App</h1>
         <h5>Kindly click <b>'Allow'</b> for the camera and audio permissions.</h5>
-        <div id="camera"></div><br>
+        <div id="camera"></div>
         <button onclick="selfie()">Click the selfie</button><br><br>
         <label>Your Selfies</label>
         <br>
@@ -85,9 +84,8 @@
             // Ma'am, I didn't add the feature which converts our speech to text because it was useless.
             imgID = 'i1';
             Webcam.set({
-                height: 294,
-                width: 344,
-                margin: 7.5,
+                width: 294,
+                height: 344,
                 image_format: 'png',
                 png_quality: 90
             });
